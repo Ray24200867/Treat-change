@@ -10,7 +10,7 @@
 .treats-donate-menu{font-weight:700;color:#c8102e}
 .treats-btn{display:inline-block;background:#c8102e;color:#fff!important;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:700}
 /* 新增區塊 */
-.treats-extra{background:#fff;color:#333;padding:56px 20px;position:relative;z-index:2}
+.treats-extra{clear:both;display:flow-root;width:100%;background:#fff;color:#333;padding:56px 20px;position:relative;z-index:2}
 .treats-wrap{max-width:1000px;margin:0 auto}
 .treats-extra h2{font-size:26px;margin:36px 0 16px;color:#222}
 .treats-plain{font-size:20px;line-height:1.7;color:#333}
