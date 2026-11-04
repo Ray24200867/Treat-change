@@ -1,4 +1,29 @@
 /* #9 關閉內容淡入動畫，首屏即顯示 */
+/* Three-level service navigation shares the theme's mobile menu behaviour. */
+@media(min-width:990px){#header .av-main-nav li:focus-within>ul{display:block!important;visibility:visible!important;opacity:1!important}#header .av-main-nav #menu-item-1570>.sub-menu{width:250px}#header .av-main-nav #menu-item-1570>.sub-menu>li>.sub-menu{width:280px;left:100%;top:0}#header .av-main-nav #menu-item-1570>.sub-menu>li>a>.avia-menu-text:after{content:"›";float:right;font-size:20px;margin-left:14px}#header .av-main-nav #menu-item-1570 .sub-menu a:focus-visible{outline:2px solid #0b538e;outline-offset:-4px}}
+.services-category{display:grid;grid-template-columns:220px minmax(0,1fr);gap:36px;border-top:1px solid #ddd;padding:32px 0;scroll-margin-top:110px}
+#main .services-category h2{font-size:27px;line-height:1.5;letter-spacing:normal;margin:0;color:#0b538e}
+.services-category ul{list-style:none;margin:0;padding:0}
+.services-category li{list-style:none;margin:0;padding:0;border-bottom:1px solid #eee}
+#main .services-category li>a{min-height:62px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:18px;color:#25333d;text-decoration:none;padding:14px 0;line-height:1.6}
+.services-category a:hover>span:first-child{text-decoration:underline;text-underline-offset:4px}
+.publication-intro{font-size:18px;line-height:1.9;color:#59626a;max-width:760px;margin:0 0 40px}
+#main .publication-section-title{font-size:25px;letter-spacing:normal;margin:0 0 22px}
+.publication-list{list-style:none!important;margin:0!important;padding:0!important;border-top:1px solid #ddd}
+.publication-list>li{list-style:none!important;margin:0!important;padding:28px 0;border-bottom:1px solid #ddd}
+.publication-date{font-size:14px;color:#a30e27;font-weight:600;margin:0 0 12px}
+#main .publication-list h2{font-size:25px;line-height:1.6;letter-spacing:normal;margin:0 0 14px;max-width:900px}
+#main .publication-list h2>a{color:#25333d;text-decoration:none}
+.publication-list h2>a:hover{text-decoration:underline;text-underline-offset:4px}
+.publication-read{display:inline-flex;align-items:center;min-height:44px;color:#0b538e;font-size:15px;font-weight:600;text-decoration:none}
+.publication-empty,.publication-book{background:#f6f5f1;border-left:4px solid #c8102e;padding:32px;max-width:850px;margin:28px 0}
+#main .publication-empty h2,#main .publication-book h2{font-size:27px;line-height:1.5;letter-spacing:normal;margin:0 0 20px}
+.publication-empty p,.publication-book p{font-size:17px;line-height:1.9;color:#59626a;margin-bottom:16px}
+.privacy-policy-copy{max-width:840px;padding:16px 0;margin-top:32px}
+.privacy-policy-copy>h2{font-size:26px;letter-spacing:normal;margin:0 0 24px}
+.privacy-policy-copy p{font-size:17px;line-height:1.95;color:#444;margin-bottom:24px}
+.privacy-policy-copy a{color:#0b538e;text-decoration:underline}
+@media(max-width:700px){.services-category{grid-template-columns:1fr;gap:15px;padding:28px 0}#main .services-category h2{font-size:24px}#main .services-category li>a{font-size:17px}#main .publication-list h2{font-size:21px}.publication-empty,.publication-book{padding:24px}#main .publication-empty h2,#main .publication-book h2{font-size:23px}.publication-intro{font-size:16px}}
 /* Footer support message sits in the centre of the right-hand column. */
 #footer>.container:has(>.treats-footer-donation){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.25fr);gap:30px;align-items:center}
 #footer>.container:has(>.treats-footer-donation)>.flex_column{width:auto!important;float:none!important;margin:0!important;min-width:0}
