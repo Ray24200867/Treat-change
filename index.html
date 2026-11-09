@@ -103,6 +103,15 @@ body:not(.ids) .tag.id{display:none}
 .collage .c{right:0;top:12%;width:31%;aspect-ratio:1}
 .collage .d{left:13%;bottom:-4%;width:25%;aspect-ratio:1}
 .collage .e{right:15%;bottom:-4%;width:25%;aspect-ratio:1}
+.home-video-frame{position:relative;width:min(100%,900px);margin:32px auto 28px;padding:14px 14px 30px;background:#eaf5e8;border:3px solid var(--blue);border-radius:36px;box-shadow:7px 9px 0 #dcecf5;text-align:center}
+.home-video-screen{aspect-ratio:16/9;overflow:hidden;border:3px solid var(--blue);border-radius:22px;background:#000}
+.home-video-screen iframe{display:block;width:100%;height:100%;border:0}
+.video-charm{position:absolute;z-index:2;display:grid;place-items:center;width:52px;height:52px;border:3px solid #fff;border-radius:50%;font:30px/1 sans-serif;pointer-events:none}
+.video-charm-heart{left:-17px;top:-19px;color:#fff;background:var(--red);transform:rotate(-15deg)}
+.video-charm-star{right:-16px;bottom:-17px;color:#fff;background:var(--green);transform:rotate(12deg)}
+.video-frame-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.video-frame-dots i{width:8px;height:8px;border-radius:50%;background:var(--blue)}.video-frame-dots i:nth-child(2){background:var(--red)}.video-frame-dots i:nth-child(3){background:var(--green)}
+@media(max-width:600px){.home-video-frame{margin:26px auto;padding:8px 8px 25px;border-radius:24px;box-shadow:4px 6px 0 #dcecf5}.home-video-screen{border-radius:14px;border-width:2px}.video-charm{width:38px;height:38px;font-size:23px}.video-charm-heart{left:-9px;top:-15px}.video-charm-star{right:-9px;bottom:-13px}}
 .hero .cta{margin-top:18px;position:relative;z-index:3;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .wave{display:block;width:100%;height:60px}
 /* marquee */
@@ -461,15 +470,12 @@ function renderFooter(){
 function wavesvg(color){return `<svg class="wv" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0 46 V22 Q50 -4 100 22 T200 22 T300 22 T400 22 T500 22 T600 22 T700 22 T800 22 T900 22 T1000 22 T1100 22 T1200 22 V46Z" fill="${color||'#ffffff'}"/></svg>`}
 function renderHome(){
  if(LANG==='en'){document.title='TREATS | Creating an inclusive society for all children'}
- const collage=`<div class="collage">
-   <div class="deco float" style="left:-2%;top:2%;width:70px;height:70px;border-radius:50%;background:var(--red)"></div>
-   <div class="deco float fb" style="right:2%;top:-2%;width:90px;height:90px;background:var(--green);border-radius:26px;transform:rotate(14deg)"></div>
-   <div class="deco float fc" style="left:46%;bottom:-4%;width:64px;height:90px;background:var(--blue);clip-path:url(#c-bean)"></div>
-   <div class="shape a cloud" data-depth="14"><img class="ph" src="${IMG.team}" alt=""></div>
-   <div class="shape b flower" data-depth="-10"><img class="ph" src="${IMG.cheer}" alt=""></div>
-   <div class="shape c squircle" data-depth="18"><img class="ph" src="${IMG.kin}" alt=""></div>
-   <div class="shape d pebble" data-depth="-16"><img class="ph" src="${IMG.comm}" alt=""></div>
-   <div class="shape e bean" data-depth="12"><img class="ph" src="${IMG.game}" alt=""></div></div>`;
+ const collage=`<div class="home-video-frame">
+   <span class="video-charm video-charm-heart" aria-hidden="true">♥</span>
+   <span class="video-charm video-charm-star" aria-hidden="true">✦</span>
+   <div class="home-video-screen"><iframe src="https://www.youtube-nocookie.com/embed/XLKAnMxtxSo?rel=0&playsinline=1" title="${t('親切 TREATS 影片','TREATS introduction video')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+   <div class="video-frame-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+ </div>`;
  const mq=['共融教育','共融體驗','運動零界限','創意無界限','青年發展','專業培訓','親切義工','共融帆船','共融龍舟','共融健球','一起玩','一起學'];
  return `<section class="hero"><div class="wrap">
   <h1><span>${t('為每位兒童','Creating an')}</span><br><span>${t('建立一個','inclusive')}</span> <span>${t('共融社會','society')}</span></h1>
