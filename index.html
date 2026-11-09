@@ -301,6 +301,7 @@ footer .member{background:rgba(255,255,255,.14);border-radius:26px;padding:18px 
 @media(max-width:640px){.roles,.g2,.g3,.g4{grid-template-columns:1fr}.phead .shape{display:none}.gal{grid-template-columns:repeat(2,1fr)}.facts div{grid-template-columns:1fr;gap:2px}.paper{margin:0;border-radius:0}.tools .btn{display:none}.pay{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
+<link rel="stylesheet" href="chatbot.css?v=20261109-1">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -598,7 +599,7 @@ let registrationOrigin=null;
 let registrationRestore=null;
 document.addEventListener('click',event=>{
  const link=event.target.closest('a');
- if(!link||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ if(!link||link.closest('#treats-guide')||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
  const label=link.querySelector('.more')?.textContent||link.textContent;
  if(!/報名|Register|Apply/i.test(label))return;
  const href=link.getAttribute('href');if(!href)return;
@@ -634,6 +635,7 @@ function route(force){document.body.classList.toggle("en",LANG==="en");
   const restore=registrationRestore&&registrationRestore.page===id?registrationRestore:null;
   window.scrollTo({top:restore?restore.scroll:0,behavior:'instant'});
   if(restore){registrationRestore=null;registrationOrigin=null;sessionStorage.removeItem('activityRegistrationOrigin');}
+  window.dispatchEvent(new Event('treats:page'));
  };
  const old=$('.page',app);
  if(old&&!force){old.classList.add('out');setTimeout(go,200)}else go();
@@ -678,5 +680,6 @@ const KINDS_READY=1;addEventListener("DOMContentLoaded",()=>route(true));
 </script>
 <script src="reviews.js?v=5"></script>
 <script src="data.js?v=20261109-layout-refinements"></script>
+<script src="chatbot.js?v=20261109-1"></script>
 </body>
 </html>

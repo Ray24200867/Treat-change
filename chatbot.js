@@ -1,0 +1,76 @@
+/* TREATS on-site guide: local navigation and site-content search. No external API. */
+(function(){
+'use strict';
+const topics=[
+ {id:'events',keys:['報名','报名','參加活動','参加活动','活動','活动','招募','register','registration','sign up','events','activities','activity'],zh:'最新活動與報名',en:'Activities & registration',page:'p3-1',zhText:'先到「最新活動」選擇想參加的計劃，閱讀活動資料，再按該計劃的「報名」。如報名表另開頁面，可用「返回活動」回到原來的介紹。',enText:'Open Latest Activities, choose a programme and read its details. Use the programme’s Registration button to apply. The registration page has a Back to activity button.'},
+ {id:'volunteer',keys:['義工','义工','志願','志愿','volunteer','volunteering','幫小朋友','帮小朋友'],zh:'成為親切義工',en:'Become a volunteer',page:'p5-2',zhText:'「親切義工」介紹一般義工、引領員及組長，以及義工簡介會、訓練和申請方法。你可以先了解服務內容，再查看申請說明。',enText:'TREATS Volunteers explains volunteer roles, briefings, training and how to apply. Start with the service introduction, then follow the application instructions.'},
+ {id:'scholarship',keys:['獎學金','奖学金','scholarship','資助學','资助学'],zh:'獎學金',en:'Scholarships',page:'p6-sch',zhText:'網站有「親切共融潛能獎學金」及「親切共融領袖獎學金」。選擇一個計劃後，可查看資格、申請流程、常見問題及申請文件。',enText:'Choose the Inclusive Potential Scholarship or the Inclusive Leader Scholarship, then check eligibility, application steps, FAQs and documents.'},
+ {id:'potential',keys:['潛能獎學金','潜能奖学金','potential scholarship'],zh:'親切共融潛能獎學金',en:'Inclusive Potential Scholarship',page:'p6-1',zhText:'這裡有潛能獎學金的計劃詳情。請按頁內的申請資格、重要日期及常見問題確認安排，再查看申請文件。',enText:'This page contains the Potential Scholarship details. Check eligibility, important dates and FAQs before opening the application documents.'},
+ {id:'leader',keys:['領袖獎學金','领袖奖学金','leader scholarship'],zh:'親切共融領袖獎學金',en:'Inclusive Leader Scholarship',page:'p6-1b',zhText:'領袖獎學金的詳細介紹、申請安排、常見問題和文件都在這一頁。',enText:'Find the Leader Scholarship introduction, application arrangements, FAQs and documents on this page.'},
+ {id:'donate',keys:['捐款','捐錢','捐钱','月捐','donat','monthly gift','support financially'],zh:'捐款支持',en:'Donation information',page:'p10',zhText:'「捐款支持」有捐款用途、方式及常見問題。月捐查詢可致電 3427 2024；正式付款及辦理安排請依照頁面說明或向親切確認。',enText:'Donation information covers how gifts are used, donation methods and FAQs. For monthly giving, call 3427 2024; follow the page instructions or contact TREATS to confirm payment arrangements.'},
+ {id:'school',keys:['學校','学校','老師','老师','幼稚園','幼儿园','小學','小学','中學','中学','school','teacher','kindergarten'],zh:'學校共融教育',en:'Inclusive education for schools',page:'p4-1',zhText:'「共融教育」按幼稚園、小學及中學介紹講座、體驗工作坊與共融活動。先選擇學生年齡或學校類別，再查看活動資料及報名。',enText:'Inclusive Education lists talks, workshops and activities for kindergartens, primary schools and secondary schools. Choose the relevant age group, then check programme details and registration.'},
+ {id:'training',keys:['培訓','培训','專業訓練','专业训练','社工','training','workshop for','social worker'],zh:'專業培訓',en:'Professional training',page:'p4-4',zhText:'「專業培訓」介紹學校、教師、社工及兒童服務工作者的培訓內容，也可按機構需要查詢安排。',enText:'Professional Training includes training for schools, teachers, social workers and child-service workers. Contact TREATS to discuss arrangements for your organisation.'},
+ {id:'sports',keys:['運動','运动','健球','欖球','榄球','帆船','龍舟','龙舟','sports','sport','sailing','rugby','dragon boat','kinball','kin-ball'],zh:'運動零界限',en:'Sport for all',page:'p4-2',section:'p4-2-3',zhText:'「共融體驗活動」的「運動零界限」有欖球、帆船、龍舟及健球計劃介紹。先查看對象及活動資料，再到頁內「報名」了解申請方法。',enText:'Sport for All on Inclusion Experiences covers rugby, sailing, dragon boating and Kin-ball. Read the target group and activity details, then use Registration on that page.'},
+ {id:'creative',keys:['創意','创意','藝術','艺术','畫畫','画画','小廚師','小厨师','art','creative','cooking'],zh:'創意無界限',en:'Creative inclusion activities',page:'p4-2',section:'p4-2-2',zhText:'「創意無界限」透過藝術及創意活動讓不同能力的參加者一起創作。可在這裡了解活動內容、對象和報名方法。',enText:'Creative inclusion activities bring people of different abilities together through art and creativity. Find programme details, target groups and registration here.'},
+ {id:'youth',keys:['青年','青少年','職場','职场','實習','实习','youth','teen','intern','career','esha','benson','故事'],zh:'青年發展',en:'Youth development',page:'p4-3',zhText:'「青年發展」有共融大使訓練、職場共融體驗及少數族裔青年服務。可按你希望參加的計劃查看內容和報名。',enText:'Youth Development includes youth ambassador training, workplace experiences and ethnic minority youth services. Choose a programme for details and registration.'},
+ {id:'minority',keys:['少數族裔','少数族裔','ethnic','minority','動起來','动起来','sport play out'],zh:'少數族裔青年服務',en:'Ethnic minority youth services',page:'p4-3',section:'p4-3-2',zhText:'這裡介紹少數族裔青年服務，包括運動導師培訓、社區參與及職場體驗。你可以先閱讀計劃介紹，再查看頁內報名入口。',enText:'Explore ethnic minority youth services, including sports leader training, community participation and workplace experiences. Read the programme introduction, then use the page’s registration entry.'},
+ {id:'reviews',keys:['回顧','回顾','以前活動','以前活动','過往','过往','review','past event','photos','照片'],zh:'活動回顧',en:'Event reviews',page:'p3-2',zhText:'「活動回顧」按年月排列活動。按照片、標題或「閱讀全文」可在新分頁開啟對應的 Facebook 原帖。',enText:'Event Reviews groups activities by month. Click a photo, title or Read more to open its original Facebook post in a new tab.'},
+ {id:'documents',keys:['下載','下载','表格','文件','年報','年报','download','form','document','annual report'],zh:'文件與刊物',en:'Documents & publications',page:'p7',zhText:'「文件與刊物」集中整理活動資料、表格與刊物。如果你要申請獎學金，也可以直接到該獎學金頁面的「申請文件」。',enText:'Documents & Publications collects programme information, forms and publications. Scholarship applicants can also use Application Documents on the relevant scholarship page.'},
+ {id:'contact',keys:['聯絡','联络','聯繫','联系','電話','电话','電郵','邮箱','地址','地圖','地图','contact','phone','email','address','map','真人','人工','human'],zh:'聯絡親切',en:'Contact TREATS',page:'p9',zhText:'你可以致電 2889 1332，或電郵 treats@treats.org.hk。「聯絡我們」也有查詢表格、地址及地圖。',enText:'Call 2889 1332 or email treats@treats.org.hk. Contact Us also provides an enquiry form, address and map.'},
+ {id:'partner',keys:['企業','企业','商界','合作','贊助','赞助','corporate','company','partner','sponsor'],zh:'商界伙伴',en:'Corporate partnerships',page:'p5-1',zhText:'「商界伙伴」介紹贊助活動、企業義工及合作方式。你可先了解選項，再聯絡親切討論合作。',enText:'Corporate Partnerships explains sponsorship, employee volunteering and collaboration options. Explore the options, then contact TREATS to discuss a partnership.'},
+ {id:'videos',keys:['影片','視頻','视频','youtube','video'],zh:'共融遊樂點子與影片',en:'Play ideas & videos',page:'p6-4',zhText:'這裡有遊戲化運動及創意活動影片，可直接在網頁內觀看；也可到首頁觀看親切介紹影片。',enText:'Watch sport-play and creative activity videos directly on this page. The homepage also has a TREATS introduction video.'},
+ {id:'about',keys:['親切是','亲切是','關於','关于','理念','共融是','what is treats','about treats','what is inclusion'],zh:'認識親切',en:'About TREATS',page:'p2-1',zhText:'「有關親切」介紹機構理念與主要服務。如果你想了解共融的意思，也可以查看「共融是甚麼」。',enText:'About TREATS introduces the organisation and its services. To learn about inclusion, explore What is inclusion as well.'}
+];
+const norm=s=>s.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
+function classify(query){const q=norm(query),raw=query.toLowerCase();return topics.map(x=>{const matches=x.keys.filter(k=>/^[a-z ]+$/i.test(k)?new RegExp('\\b'+k.replace(/ /g,'\\s+')+(/^(donat|intern|teen)$/.test(k)?'[a-z]*':'s?\\b'),'i').test(raw):q.includes(norm(k)));const size=Math.max(0,...matches.map(k=>norm(k).length));return {item:x,score:size?Math.max(1,size+(matches.length-1)*.5-(x.id==='events'?2:x.id==='documents'?1:0)):0};}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);}
+function answer(query,ctx,lang){
+ const en=lang==='en',q=query.trim();
+ if(!q)return {type:'empty'};
+ if(/^(你好|您好|嗨|hello|hi|hey|多謝|谢谢|謝謝|thanks|thank you)[!！。 .]*$/i.test(q))return {type:'greeting',text:en?'Hello! Tell me what you would like to do, and I’ll help you find the right page.':'你好！告訴我你想做甚麼，我會幫你找合適的頁面。',links:[]};
+ let ranked=classify(q),follow=/報名|报名|申請|申请|register|apply|sign.?up/i.test(q);
+ const specific=ranked.filter(x=>!['events','documents'].includes(x.item.id));
+ if(follow&&ctx&&!specific.length&&q.length<55){const item=topics.find(x=>x.id===ctx);if(item&&['sports','creative','youth','minority','volunteer','potential','leader','school','training'].includes(ctx))return {type:'topic',context:ctx,text:en?'Open this programme page, read the activity details, then use its Registration or Application section. If you cannot find an entry, contact TREATS for help.':'請打開這個計劃頁面，先閱讀活動資料，再到「報名」或申請說明查看方法。如果找不到入口，可聯絡親切查詢。',links:[item,topics.find(x=>x.id==='contact')]};}
+ if(ranked.length){const top=ranked[0].item;return {type:'topic',context:top.id,text:en?top.enText:top.zhText,links:[top,...ranked.slice(1).filter(x=>x.score>=3&&x.item.page!==top.page).slice(0,1).map(x=>x.item)]};}
+ return {type:'search',text:en?'I haven’t found a clear match yet. Try a programme name, or tell me whether you want to join an activity, volunteer, apply for a scholarship or contact TREATS.':'暫時未找到明確對應的內容。你可以輸入計劃名稱，或告訴我你想報名活動、做義工、申請獎學金，還是聯絡親切。',links:[]};
+}
+function searchSite(query,pages,language,translate=x=>x){
+ const terms=query.toLowerCase().match(/[a-z]{3,}|[\u3400-\u9fff]{2,}/g)||[];
+ const stop=new Set(['the','can','you','please','find','want','looking','for','how','where','this','that']);
+ const words=terms.filter(w=>!stop.has(w));if(!words.length)return [];
+ const results=[];
+ Object.entries(pages).forEach(([page,p])=>{const title=language==='en'?p.t?.[1]:p.t?.[0];
+ (p.blocks||[]).forEach(b=>{const h=language==='en'?translate(b.h||''):b.h||'';
+ const body=JSON.stringify(b).replace(/<[^>]*>/g,' ').toLowerCase(),heading=(h+' '+title).toLowerCase();
+ const hits=words.filter(w=>body.includes(w)||heading.includes(w));if(hits.length!==words.length)return;
+ const score=hits.reduce((n,w)=>n+(heading.includes(w)?4:1),0);
+ results.push({id:'result',page,section:b.id,zh:b.h||p.t?.[0],en:language==='en'?h||title:title,score});});});
+ return results.sort((a,b)=>b.score-a.score).filter((x,i,a)=>a.findIndex(y=>y.page===x.page)===i).slice(0,3);
+}
+if(typeof module!=='undefined'&&module.exports){module.exports={answer,classify,topics,searchSite};return;}
+const root=document.createElement('div');root.id='treats-guide';document.body.appendChild(root);
+let opened=false,history=[],context=null,language=null,pending=null;
+const lang=()=>typeof LANG!=='undefined'&&LANG==='en'?'en':'zh';
+const txt=(zh,en)=>lang()==='en'?en:zh;
+const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-3 2v-10a9.5 9.5 0 0 1 19 0Z"/><path d="M6 10h8M6 14h5"/></svg>';
+function linkNode(item){const a=document.createElement('a');a.href='#'+item.page;a.textContent=(lang()==='en'?item.en:item.zh)+' →';a.dataset.page=item.page;if(item.section)a.dataset.section=item.section;return a;}
+function addMessage(who,text,links=[]){const row=document.createElement('div');row.className='guide-message '+who;const p=document.createElement('p');p.textContent=text;row.appendChild(p);if(links.length){const nav=document.createElement('div');nav.className='guide-results';links.forEach(x=>nav.appendChild(linkNode(x)));row.appendChild(nav);}root.querySelector('.guide-log').appendChild(row);}
+function paint(){language=lang();root.innerHTML=`<button class="guide-launch" aria-controls="guide-panel" aria-expanded="${opened}" aria-label="${txt('開啟站內導覽助手','Open the site guide')}">${icon}<span>${txt('需要幫忙？','Need help?')}</span></button><section class="guide-panel" id="guide-panel" role="dialog" aria-modal="false" aria-labelledby="guide-title" ${opened?'':'hidden'}><header><div><strong id="guide-title">${txt('親切小幫手','TREATS Guide')}</strong><small>${txt('站內導覽 · 幫你找到需要的資訊','Site guide · Find your next step')}</small></div><button class="guide-close" aria-label="${txt('關閉聊天','Close chat')}">×</button></header><div class="guide-log" role="log" aria-live="polite" aria-relevant="additions" tabindex="0"></div><div class="guide-chips">${[['我想報名活動','Find an activity'],['我想做義工','Volunteer'],['找獎學金','Scholarships'],['聯絡親切','Contact TREATS']].map(x=>`<button type="button">${txt(...x)}</button>`).join('')}</div><form class="guide-form"><label class="guide-sr" for="guide-input">${txt('告訴我你想找甚麼','Tell me what you are looking for')}</label><input id="guide-input" type="text" maxlength="500" autocomplete="off" placeholder="${txt('例如：我想參加帆船活動','e.g. I want to join sailing')}" required><button type="submit" aria-label="${txt('傳送','Send')}">↑</button></form><div class="guide-note"><span>${txt('按網站內容提供導覽；不會提交表格或辦理報名。','Navigation from site content; does not submit forms or applications.')}</span><button class="guide-reset">${txt('重新開始','Start over')}</button></div></section>`;
+ addMessage('assistant',txt('你好！我是親切的站內導覽小幫手。你想參加活動、做義工，還是尋找其他資訊？告訴我，我會指引你到相關頁面。','Hello! I’m the TREATS site guide. Tell me what you want to do—join an activity, volunteer, or find information—and I’ll point you to the relevant page.'));
+ history.forEach(m=>{if(m.who==='user')addMessage('user',m.text);else{const a=respond(m.query,m.context);addMessage('assistant',a.text,a.links);}});
+ root.querySelector('.guide-launch').onclick=()=>setOpen(!opened);
+ root.querySelector('.guide-close').onclick=()=>setOpen(false);
+ root.querySelector('.guide-form').onsubmit=e=>{e.preventDefault();submit(root.querySelector('input').value);};
+ root.querySelectorAll('.guide-chips button').forEach(b=>b.onclick=()=>submit(b.textContent));
+ root.querySelector('.guide-reset').onclick=()=>{history=[];context=null;paint();root.querySelector('input').focus();};
+ root.querySelector('.guide-log').onclick=e=>{const a=e.target.closest('a[data-page]');if(!a)return;e.preventDefault();pending={page:a.dataset.page,section:a.dataset.section};setOpen(false);if(location.hash==='#'+pending.page)finishNavigation();else location.hash=pending.page;};
+ if(opened)scrollLog();
+}
+function setOpen(value){opened=value;if(value){paint();root.querySelector('input').focus();}else{root.querySelector('.guide-panel').hidden=true;root.querySelector('.guide-launch').setAttribute('aria-expanded','false');root.querySelector('.guide-launch').focus();}}
+function scrollLog(){const el=root.querySelector('.guide-log');el.scrollTop=el.scrollHeight;}
+function respond(query,ctx){const a=answer(query,ctx,lang());if(a.type==='search'&&typeof PAGES!=='undefined'){const results=searchSite(query,PAGES,lang(),typeof trs==='function'?trs:x=>x);if(results.length){a.text=txt('我在網站中找到以下相關內容，點選即可前往：','I found these related pages. Choose one to open the relevant section:');a.links=results;}}return a;}
+function submit(value){const query=value.trim();if(!query)return;const prior=context,a=respond(query,context);history.push({who:'user',text:query},{who:'assistant',query,context:prior});if(a.context)context=a.context;addMessage('user',query);addMessage('assistant',a.text,a.links);root.querySelector('input').value='';scrollLog();}
+function finishNavigation(){if(!pending)return;const target=pending;pending=null;if(target.section){const el=document.getElementById(target.section);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.setAttribute('tabindex','-1');el.focus({preventScroll:true});}}}
+root.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened){e.preventDefault();setOpen(false);}});
+addEventListener('treats:page',()=>{if(language!==lang())paint();finishNavigation();});
+paint();
+})();
