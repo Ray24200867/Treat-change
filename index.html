@@ -21,8 +21,8 @@ body{font-family:var(--body);color:var(--ink);background:var(--paper);line-heigh
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 img{display:block;max-width:100%}
-.paper{max-width:1080px;margin:0 auto;background:var(--paper);overflow:hidden;position:relative}
-.wrap{padding:0 clamp(20px,4vw,48px)}
+.paper{width:100%;max-width:none;margin:0;background:var(--paper);overflow:hidden;position:relative}
+.wrap{width:100%;max-width:1440px;margin-inline:auto;padding:0 clamp(20px,4vw,64px)}
 body.en .nav-item>a{font-size:11.5px;padding:6px 5px}
 /* ===== header ===== */
 header.top{position:sticky;top:0;z-index:50;background:rgba(255,253,249,.92);backdrop-filter:blur(10px);border-bottom:2px dashed var(--blue-t);transition:.3s}
