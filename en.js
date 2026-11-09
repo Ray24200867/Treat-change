@@ -100,6 +100,13 @@ const EN={
 function trs(s){
   const m=s.match(/^(\s*)([\s\S]*?)(\s*)$/); const core=m[2]; if(!core) return s;
   if(EN[core]!==undefined) return m[1]+EN[core]+m[3];
+  if(core.startsWith('「')&&core.endsWith('」')){const v=trs(core.slice(1,-1));if(v!==core.slice(1,-1))return m[1]+'“'+v+'”'+m[3];}
+  if(core.startsWith('— ')){const v=trs(core.slice(2));if(v!==core.slice(2))return m[1]+'— '+v+m[3];}
+  if(core.endsWith(' ↗')){const v=trs(core.slice(0,-2));if(v!==core.slice(0,-2))return m[1]+v+' ↗'+m[3];}
+  let date=core.match(/^(\d{4})\s*年\s*(\d{1,2})\s*月(?:\s*(\d{1,2})\s*日)?$/);
+  if(date){const month=['January','February','March','April','May','June','July','August','September','October','November','December'][Number(date[2])-1];return m[1]+(date[3]?Number(date[3])+' ':'')+month+' '+date[1]+m[3];}
+  let stage=core.match(/^階段\s*(\d+)$/);if(stage)return m[1]+'Stage '+stage[1]+m[3];
+
   let r=core.match(/^(p\d+(?:-\d+)*)\s+([\s\S]+)$/); if(r&&EN[r[2]]!==undefined) return m[1]+r[1]+' '+EN[r[2]]+m[3];
   r=core.match(/^(\d{4}-\d\d-\d\d)　(.+)$/); if(r&&EN[r[2]]!==undefined) return m[1]+r[1]+'  '+EN[r[2]]+m[3];
   r=core.match(/^(.+?) 年$/); if(r&&/^\d{4}$/.test(r[1])) return m[1]+r[1]+m[3];
@@ -114,6 +121,6 @@ function trDom(root){
   if(LANG!=='en')return;
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const ns=[];while(w.nextNode())ns.push(w.currentNode);
   ns.forEach(n=>{const v=trs(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});
-  root.querySelectorAll('[placeholder]').forEach(e=>{const v=trs(e.getAttribute('placeholder'));e.setAttribute('placeholder',v)});
+  root.querySelectorAll('[placeholder],[title],[aria-label],[alt]').forEach(e=>{['placeholder','title','aria-label','alt'].forEach(a=>{if(e.hasAttribute(a))e.setAttribute(a,trs(e.getAttribute(a)))})});
 }
 Object.assign(EN,{'重要日期 2026':'Important Dates 2026','申請流程':'Application Steps','2月13日':'13 February','2月下旬':'Late February','3月':'March','4月前':'Before 1 April','6月':'June','截止報名':'Deadline of application','初步評選，公佈入圍面試名單':'Preliminary screening and announcement of shortlisted applicants for interview','獎學金面試日':'Scholarship interview day','公佈獎學金結果':'Awards announcement','發放獎學金；獎學金頒獎禮':'Disbursement of scholarship; Award Presentation Ceremony','初步評選':'Preliminary screening','面試':'Interview','簽署獎學金同意書':'Scholarship agreement signed','獎學金發放':'Disbursement of scholarship'});
