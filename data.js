@@ -493,7 +493,7 @@ const style=document.createElement('style');style.textContent=`
 `;document.head.appendChild(style)})();
 
 (function(){const style=document.createElement('style');style.textContent=`
-#p4-4-2>p.t{background:#fff;border:2px solid var(--blue-t);border-radius:24px;padding:26px 30px;margin:16px 0 0;line-height:1.9;box-shadow:0 4px 14px rgba(0,80,140,.035)}
+#p4-4-2>p.t{width:100%;max-width:none;background:#fff;border:2px solid var(--blue-t);border-radius:24px;padding:26px 30px;margin:16px 0 0;line-height:1.9;box-shadow:0 4px 14px rgba(0,80,140,.035)}
 @media(max-width:600px){#p4-4-2>p.t{padding:20px;border-radius:18px}}
 `;document.head.appendChild(style)})();
 

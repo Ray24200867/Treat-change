@@ -93,7 +93,7 @@ body:not(.ids) .tag.id{display:none}
 .header-socials{display:flex;align-items:center;gap:8px}.header-socials a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:var(--blue);background:#edf5fa;transition:background .2s,transform .2s}.header-socials a:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}.header-socials a:focus-visible{outline:3px solid var(--green);outline-offset:3px}.header-socials svg{width:18px;height:18px}@media(max-width:600px){.header-socials{gap:5px}.header-socials a{width:30px;height:30px}.header-socials svg{width:16px;height:16px}}
 .illustrated-block-heading{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:24px}.illustrated-block-heading h2{flex:1;margin:0;min-width:0}.theme-illustration{flex:0 0 clamp(180px,23vw,280px);aspect-ratio:3/2;background-image:url('img/inclusion-themes.webp');background-repeat:no-repeat;background-size:200% 200%}.theme-play{background-position:0 0}.theme-sail{background-position:100% 0}.theme-create{background-position:0 100%}.theme-volunteer{background-position:100% 100%}@media(max-width:640px){.illustrated-block-heading{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:20px}.theme-illustration{flex:none;width:min(70%,240px);align-self:center}.illustrated-block-heading h2{width:100%}}
 .youth-service-intro{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);align-items:center;gap:clamp(24px,4vw,56px)}.youth-service-intro img{width:100%;height:auto;max-width:440px;justify-self:center}.youth-service-intro p.t{max-width:none}@media(max-width:720px){.youth-service-intro{grid-template-columns:1fr;gap:16px}.youth-service-intro img{max-width:340px;width:85%}}
-.sports-leader-intro{display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,1.65fr);align-items:center;gap:clamp(24px,4vw,56px)}.sports-leader-intro img{width:100%;height:auto;max-width:420px;justify-self:center}.sports-leader-intro p.t{max-width:none}@media(max-width:720px){.sports-leader-intro{grid-template-columns:1fr;gap:22px}.sports-leader-intro img{width:85%;max-width:340px}}
+.sports-leader-intro{display:grid;grid-template-columns:minmax(200px,.75fr) minmax(0,2fr);align-items:center;gap:clamp(24px,4vw,56px)}.sports-leader-intro img{width:100%;height:auto;max-width:320px;justify-self:center}.sports-leader-intro h2{font-family:var(--disp);font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.45;color:var(--blue);margin:0 0 18px}.sports-leader-intro p.t{max-width:none}@media(max-width:720px){.sports-leader-intro{grid-template-columns:1fr;gap:22px}.sports-leader-intro img{width:85%;max-width:340px}}
 /* ===== hero ===== */
 .hero{padding:34px 0 60px;position:relative;text-align:center;overflow:hidden;background:#fff}
 .hero h1{font-family:var(--disp);font-size:clamp(40px,7vw,84px);line-height:1.15;color:var(--blue);position:relative;z-index:2}
@@ -318,7 +318,6 @@ footer .member{background:rgba(255,255,255,.14);border-radius:26px;padding:18px 
   <main id="app"></main>
   <footer class="foot" id="foot"></footer>
 </div>
-<button class="idtoggle" id="idt">顯示結構編號</button>
 <button class="totop" id="totop" aria-label="top">↑</button>
 <div class="lb" id="lb"><img alt=""></div>
 
@@ -448,6 +447,7 @@ const logoMark=`<img src="img/Treats-40-logo_web-04.png" alt="TREATS">`;
 
 /* ============ header / footer ============ */
 const SOCIAL_ACCOUNTS=[
+ {name:'YouTube',url:'https://www.youtube.com/@TreatsHK',icon:'<path d="M22 7.2a3 3 0 0 0-2.1-2.1C18 4.6 12 4.6 12 4.6s-6 0-7.9.5A3 3 0 0 0 2 7.2 31 31 0 0 0 1.5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z"/><path d="m10 8.5 6 3.5-6 3.5z" fill="white"/>'},
  {name:'Facebook',url:'https://www.facebook.com/treatshk/',icon:'<path d="M14 21v-8h3l.5-4H14V7c0-1.1.4-2 2-2h2V1.4A25 25 0 0 0 15 1c-3 0-5 1.8-5 5v3H7v4h3v8z"/>'},
  {name:'Instagram',url:'https://www.instagram.com/treats_hk/',icon:'<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/>'},
  {name:'LinkedIn',url:'https://www.linkedin.com/company/treats-hk/',icon:'<path d="M5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 9h4v12H3zM10 9h4v1.7c.7-1.2 1.8-2 3.7-2 3.2 0 4.3 2 4.3 5V21h-4v-6.6c0-1.7-.6-2.5-1.9-2.5-1.4 0-2.1 1-2.1 2.5V21h-4z"/>'}
@@ -518,7 +518,7 @@ function realMap(address,label=address){
  return `<div class="real-map"><iframe title="${safe}地圖" src="https://www.google.com/maps?q=${query}&output=embed&hl=zh-TW" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><a class="map-route" href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">在 Google 地圖查看路線 ↗</a>`;
 }
 function blockHtml(b,pg){
- if(b.id==='p4-3-2-1'&&b.k==='text')return `<section class="blk rv" id="${b.id}">${idtag(b.id)}<h2>${b.h}</h2><div class="sports-leader-intro"><img src="img/youth-sports-leader.webp" alt="" aria-hidden="true" loading="lazy" width="1000" height="667"><div>${(b.p||[]).map(x=>`<p class="t">${x}</p>`).join('')}${goBtn(b.go,'blue')}</div></div></section>`;
+ if(b.id==='p4-3-2-1'&&b.k==='text')return `<section class="blk rv" id="${b.id}">${idtag(b.id)}<div class="sports-leader-intro"><img src="img/youth-sports-leader.webp" alt="" aria-hidden="true" loading="lazy" width="1000" height="667"><div><h2>${b.h}</h2>${(b.p||[]).map(x=>`<p class="t">${x}</p>`).join('')}${goBtn(b.go,'blue')}</div></div></section>`;
 
  if(b.id==='p4-3-2'&&b.k==='text')return `<section class="blk rv" id="${b.id}">${idtag(b.id)}<h2>${b.h}</h2><div class="youth-service-intro"><div>${(b.p||[]).map(x=>`<p class="t">${x}</p>`).join('')}${goBtn(b.go,'blue')}</div><img src="img/inclusive-youth-v3.webp" alt="" aria-hidden="true" loading="lazy" width="1000" height="667"></div></section>`;
 
@@ -671,13 +671,12 @@ function bind(){
 function count(el){if(el._d)return;el._d=1;const to=+el.dataset.count,s=performance.now();(function f(n){const p=Math.min(1,(n-s)/1400);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)}
 function burst(x,y,n){const cs=['#E4002B','#00508C','#3FA535','#ffffff'];for(let i=0;i<n;i++){const s=document.createElement('i');s.className='conf';s.style.left=x+'px';s.style.top=y+'px';s.style.background=cs[i%4];if(i%3==0)s.style.borderRadius='50%';const a=Math.random()*6.28,d=40+Math.random()*90;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d-30+'px');s.style.setProperty('--rot',Math.random()*720+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}}
 $('#lb').onclick=()=>$('#lb').classList.remove('show');
-$('#idt').onclick=()=>{const on=document.body.classList.toggle('ids');$('#idt').textContent=LANG==='en'?(on?'Hide structure IDs':'Show structure IDs'):(on?'隱藏結構編號':'顯示結構編號')};
 addEventListener('scroll',()=>{$('#top').classList.toggle('small',scrollY>40);$('#totop').classList.toggle('show',scrollY>500)});
 $('#totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 addEventListener('hashchange',()=>route());
 const KINDS_READY=1;addEventListener("DOMContentLoaded",()=>route(true));
 </script>
 <script src="reviews.js?v=5"></script>
-<script src="data.js?v=20261109-facebook-review-links"></script>
+<script src="data.js?v=20261109-layout-refinements"></script>
 </body>
 </html>
