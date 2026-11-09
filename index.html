@@ -91,6 +91,7 @@ img[src*="encouragement"]{object-position:50% 88%}
 body:not(.ids) .tag.id{display:none}
 .role-title{padding-top:24px;text-align:center}@media(max-width:600px){.role-title{padding-top:16px}}
 .header-socials{display:flex;align-items:center;gap:8px}.header-socials a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:var(--blue);background:#edf5fa;transition:background .2s,transform .2s}.header-socials a:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}.header-socials a:focus-visible{outline:3px solid var(--green);outline-offset:3px}.header-socials svg{width:18px;height:18px}@media(max-width:600px){.header-socials{gap:5px}.header-socials a{width:30px;height:30px}.header-socials svg{width:16px;height:16px}}
+.illustrated-block-heading{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:24px}.illustrated-block-heading h2{flex:1;margin:0;min-width:0}.theme-illustration{flex:0 0 clamp(180px,23vw,280px);aspect-ratio:3/2;background-image:url('img/inclusion-themes.webp');background-repeat:no-repeat;background-size:200% 200%}.theme-play{background-position:0 0}.theme-sail{background-position:100% 0}.theme-create{background-position:0 100%}.theme-volunteer{background-position:100% 100%}@media(max-width:640px){.illustrated-block-heading{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:20px}.theme-illustration{flex:none;width:min(70%,240px);align-self:center}.illustrated-block-heading h2{width:100%}}
 /* ===== hero ===== */
 .hero{padding:34px 0 60px;position:relative;text-align:center;overflow:hidden;background:#fff}
 .hero h1{font-family:var(--disp);font-size:clamp(40px,7vw,84px);line-height:1.15;color:var(--blue);position:relative;z-index:2}
@@ -515,7 +516,9 @@ function realMap(address,label=address){
  return `<div class="real-map"><iframe title="${safe}地圖" src="https://www.google.com/maps?q=${query}&output=embed&hl=zh-TW" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><a class="map-route" href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">在 Google 地圖查看路線 ↗</a>`;
 }
 function blockHtml(b,pg){
- let o=`<section class="blk${b.k==='reviewCards'?'':' rv'}" id="${b.id}">${idtag(b.id)}${b.h?`<h2>${b.h}</h2>`:''}`;
+ const themeArt={'p4-2-1':'play','p4-2-2':'create','p4-2-3':'sail','p5-2-1':'volunteer'}[b.id];
+ const heading=b.h?(themeArt?`<div class="illustrated-block-heading"><h2>${b.h}</h2><div class="theme-illustration theme-${themeArt}" aria-hidden="true"></div></div>`:`<h2>${b.h}</h2>`):'';
+ let o=`<section class="blk${b.k==='reviewCards'?'':' rv'}" id="${b.id}">${idtag(b.id)}${heading}`;
  switch(b.k){
  default: if(KINDS[b.k]) o+=KINDS[b.k](b,pg); break;
  case 'text': o+=`${(b.p||[]).map(x=>`<p class="t">${x}</p>`).join('')}${b.logo?`<div class="brand-logo-row" aria-label="親切標誌、親切 TREATS 字標及四十週年標誌">${['0 120 225 220','253 160 211 155','488 78 346 244'].map((view,i)=>`<div class="brand-logo-cell"><svg viewBox="${view}" role="img" aria-label="${['親切標誌','親切 TREATS','四十週年標誌'][i]}"><image href="img/Treats-40-logo_web-03-1.png" width="834" height="417"/></svg></div>`).join('')}</div>`:''}${goBtn(b.go,'blue')}`;break;
