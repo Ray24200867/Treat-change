@@ -89,6 +89,7 @@ img[src*="encouragement"]{object-position:50% 88%}
 .lead{font-size:18px;text-align:center;max-width:760px;margin:0 auto 28px;color:var(--grey)}
 .tag{display:inline-block;font:700 12px/1 'Fredoka',sans-serif;letter-spacing:.06em;padding:5px 10px;border-radius:999px;background:var(--blue-t);color:var(--blue);margin-bottom:8px}
 body:not(.ids) .tag.id{display:none}
+.roles-heading{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,70px);max-width:1050px;margin:0 auto 34px}.roles-heading-copy{flex:1;min-width:0}.roles-heading .h2{margin-bottom:14px}.roles-heading .squig{margin-bottom:0}.roles-heading-art{display:block;width:clamp(240px,29vw,360px);height:auto;flex-shrink:0;align-self:flex-end}@media(max-width:680px){.roles-heading{flex-direction:column;gap:18px;margin-bottom:26px}.roles-heading-copy{width:100%}.roles-heading-art{align-self:center;width:min(78%,300px)}}
 /* ===== hero ===== */
 .hero{padding:34px 0 60px;position:relative;text-align:center;overflow:hidden;background:#fff}
 .hero h1{font-family:var(--disp);font-size:clamp(40px,7vw,84px);line-height:1.15;color:var(--blue);position:relative;z-index:2}
@@ -481,7 +482,7 @@ function renderHome(){
   <h1><span>${t('為每位兒童','Creating an')}</span><br><span>${t('建立一個','inclusive')}</span> <span>${t('共融社會','society')}</span></h1>
   <p class="sub" style="${LANG==='zh'?'display:none':''}">${t('','for all children')}</p>
   ${collage}
-  <div class="cta"><a class="btn" href="#p3-1">${t('看看最新招募','See what\'s on')} →</a><a class="btn ghost" href="#p2-1">${t('認識親切','About us')}</a></div></div></section>
+  <div class="cta"><a class="btn" href="#p3-1">${t('看看最新招募','See what\'s on')} →</a></div></div></section>
   <div class="marq"><div>${[...mq,...mq,...mq,...mq].map(x=>`<span>★ ${x}</span>`).join('')}</div></div>
   <section class="sec"><div class="wrap">${idtag('p1-1')}<span class="h2 rv">${t('什麼是<em>共融</em>？','What is <em>inclusion</em>?')}</span><i class="squig"></i>
    <div class="intro"><div class="rv l"><div class="photo pebble"><img class="ph" src="${IMG.cheer}" alt=""></div></div>
@@ -490,7 +491,7 @@ function renderHome(){
    <p>${t('我們相信，每位兒童，不論任何能力和背景，均有權參與社會和享受與人接觸的樂趣。','We believe every child, regardless of ability and background, has the right to take part in society.')}</p>
    <a class="btn blue" href="#p2-4">${t('了解更多','Learn more')} →</a></div></div>
    <div class="stats">${[[45,t('週年（2026）','years (2026)')],[158500,t('名兒童及青少年每年受惠','children and youth reached each year')],[80,t('名兒童／每日約 $7（月捐 $200）','children for about $7 a day')],[10,t('個潛能獎學金名額／年','scholarships a year')]].map(s=>`<div class="stat rv pop"><b data-count="${s[0]}">0</b><span>${s[1]}</span></div>`).join('')}</div></div></section>
-  <section class="sec" style="background:var(--cream)"><div class="wrap">${idtag('p1-2')}<span class="h2 rv">${t('你想做<em>甚麼</em>？','What would you like to <em>do</em>?')}</span><i class="squig"></i>
+  <section class="sec" style="background:var(--cream)"><div class="wrap">${idtag('p1-2')}<div class="roles-heading"><div class="roles-heading-copy"><span class="h2 rv">${t('你想做<em>甚麼</em>？','What would you like to <em>do</em>?')}</span><i class="squig"></i></div><img class="roles-heading-art" src="img/puzzle-people.webp" alt="" aria-hidden="true" loading="lazy" width="1100" height="550"></div>
    <div class="roles">${ROLES.map((r,i)=>`<button class="role rv pop" data-i="${i}" style="transition-delay:${i*70}ms"><span class="tag id" style="background:#fff3">${r[0]}</span><h3>${r[1]}</h3><p>${r[2]}</p><span class="go">→</span></button>`).join('')}</div>
    <div class="rolepanel" id="rp"><div class="in"></div></div></div></section>
   <section class="sec"><div class="wrap">${idtag('p1-3')}<span class="h2 rv">${t('最新<em>招募</em>','Now <em>recruiting</em>')}</span><i class="squig"></i>
