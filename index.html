@@ -302,6 +302,7 @@ footer .member{background:rgba(255,255,255,.14);border-radius:26px;padding:18px 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 <link rel="stylesheet" href="chatbot.css?v=20261109-1">
+<link rel="stylesheet" href="mobile.css?v=20261109-1">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -460,11 +461,11 @@ function renderHeader(cur){
   <div class="logo">${logoMark}<span>親切<small>TREATS</small></span></div>
   <nav class="main"><div class="nav-item"><a href="#home" class="${cur==="home"?"on":""}">${t("首頁","Home")}</a></div>${NAV.map(n=>`<div class="nav-item"><a href="#${n.kids[0]}" class="${(n.kids.includes(cur)||(n.kids.includes('p6-sch')&&['p6-1','p6-1b'].includes(cur)))?'on':''}">${t(n.zh,n.en)}</a>${n.kids.length>1?`<div class="drop">${n.kids.map(k=>`<a href="#${k}">${pt(k)}</a>`).join('')}</div>`:''}</div>`).join('')}</nav>
   <div class="tools"><div class="lang"><button data-l="zh" class="${LANG==='zh'?'on':''}">中文</button><button data-l="en" class="${LANG==='en'?'on':''}">English</button></div>
-   <div class="header-socials">${socialIcons()}</div><button class="burger" id="burger" aria-label="menu"><i></i><i></i><i></i></button></div>
+   <div class="header-socials">${socialIcons()}</div><button class="burger" id="burger" aria-label="menu" aria-expanded="false" aria-controls="mobile"><i></i><i></i><i></i></button></div>
  </div></div>
  <div class="mobile" id="mobile"><div class="mg"><a href="#home">${t("首頁","Home")}</a>${NAV.map(n=>`<a href="#${n.kids[0]}">${t(n.zh,n.en)}</a>${n.kids.length>1?`<div>${n.kids.map(k=>`<a href="#${k}">${pt(k)}</a>`).join('')}</div>`:''}`).join('')}<a href="#p10">♥ ${t('捐款支持','Donate')}</a></div></div>`;
  $$('.lang button',h).forEach(b=>b.onclick=()=>{LANG=b.dataset.l;localStorage.setItem('lang',LANG);route(true)});
- $('#burger').onclick=e=>{e.currentTarget.classList.toggle('open');$('#mobile').classList.toggle('open')};
+ $('#burger').onclick=e=>{const open=e.currentTarget.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',String(open));$('#mobile').classList.toggle('open',open)};
 }
 function renderFooter(){
  $('#foot').innerHTML=`<svg class="fw" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0 46 V20 Q50 -6 100 20 T200 20 T300 20 T400 20 T500 20 T600 20 T700 20 T800 20 T900 20 T1000 20 T1100 20 T1200 20 V46Z" fill="#00508C"/></svg>

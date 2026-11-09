@@ -1,0 +1,39 @@
+/* Narrow-screen fixes, kept separate from desktop layout. */
+@media(max-width:640px){
+ #top .bar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;height:auto;min-height:102px;gap:5px 8px;padding-block:8px}
+ #top.small .bar{height:auto}
+ #top .logo{grid-column:1;grid-row:1;gap:6px;font-size:18px}
+ #top .logo img{width:34px;height:34px}
+ #top .logo small{font-size:10px}
+ #top .tools{display:contents}
+ #top .lang{grid-column:2;grid-row:1;font-size:12px}
+ #top .lang button{padding:4px 7px;min-height:32px}
+ #top .burger{grid-column:3;grid-row:1;width:38px;height:38px;display:flex}
+ #top .header-socials{grid-column:1/-1;grid-row:2;justify-content:center;gap:12px}
+ #top .header-socials a{width:36px;height:36px}
+ #top .header-socials svg{width:18px;height:18px}
+ #top .mobile.open{max-height:calc(100dvh - 106px);overscroll-behavior:contain}
+ #app .phead .row>div:first-child{min-width:0;width:100%}
+ #app .phead h1{font-size:clamp(28px,7.5vw,38px);overflow-wrap:anywhere}
+ #app .blk h2,#app .blk h3{overflow-wrap:anywhere}
+ #app .facts{padding-inline:20px}
+ #app .facts span,#app .facts a,#app .grid>*{min-width:0;overflow-wrap:anywhere}
+ #foot .donbar{width:100%;max-width:100%;margin:18px 0 0;transform:none;padding:14px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+ #foot .donbar>span{min-width:0;max-width:100%;font-size:15px;line-height:1.7;overflow-wrap:anywhere}
+ #foot .donbar .btn{align-self:flex-end;white-space:normal}
+ #foot .fgrid>div{min-width:0}
+ #foot p{overflow-wrap:anywhere}
+ #foot .legal{padding-right:0;padding-bottom:76px}
+ #app .btn{max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere}
+ #app .list a,#app .list .it{padding:16px;gap:12px}
+ #app .list a>span:first-child{min-width:0;overflow-wrap:anywhere}
+ #app input,#app textarea,#app select,#guide-input{font-size:16px}
+ #app .brand-logo-row{gap:12px}
+}
+@media(max-width:360px){
+ #top .bar{column-gap:5px}
+ #top .lang button{padding-inline:5px}
+ #top .logo{font-size:16px;gap:4px}
+ #top .logo img{width:30px;height:30px}
+ #app .hero h1{font-size:34px}
+}
