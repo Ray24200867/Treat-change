@@ -89,7 +89,6 @@ img[src*="encouragement"]{object-position:50% 88%}
 .lead{font-size:18px;text-align:center;max-width:760px;margin:0 auto 28px;color:var(--grey)}
 .tag{display:inline-block;font:700 12px/1 'Fredoka',sans-serif;letter-spacing:.06em;padding:5px 10px;border-radius:999px;background:var(--blue-t);color:var(--blue);margin-bottom:8px}
 body:not(.ids) .tag.id{display:none}
-.roles-heading{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,70px);max-width:1050px;margin:0 auto 34px}.roles-heading-copy{flex:1;min-width:0}.roles-heading .h2{margin-bottom:14px}.roles-heading .squig{margin-bottom:0}.roles-heading-art{display:block;width:clamp(240px,29vw,360px);height:auto;flex-shrink:0;align-self:flex-end}@media(max-width:680px){.roles-heading{flex-direction:column;gap:18px;margin-bottom:26px}.roles-heading-copy{width:100%}.roles-heading-art{align-self:center;width:min(78%,300px)}}
 /* ===== hero ===== */
 .hero{padding:34px 0 60px;position:relative;text-align:center;overflow:hidden;background:#fff}
 .hero h1{font-family:var(--disp);font-size:clamp(40px,7vw,84px);line-height:1.15;color:var(--blue);position:relative;z-index:2}
@@ -113,6 +112,7 @@ body:not(.ids) .tag.id{display:none}
 .video-frame-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
 .video-frame-dots i{width:8px;height:8px;border-radius:50%;background:var(--blue)}.video-frame-dots i:nth-child(2){background:var(--red)}.video-frame-dots i:nth-child(3){background:var(--green)}
 @media(max-width:600px){.home-video-frame{margin:26px auto;padding:8px 8px 25px;border-radius:24px;box-shadow:4px 6px 0 #dcecf5}.home-video-screen{border-radius:14px;border-width:2px}.video-charm{width:38px;height:38px;font-size:23px}.video-charm-heart{left:-9px;top:-15px}.video-charm-star{right:-9px;bottom:-13px}}
+.home-video-frame{margin-bottom:68px}.video-puzzle-art{position:absolute;z-index:3;right:24px;bottom:-42px;width:210px;height:auto;pointer-events:none}@media(max-width:600px){.home-video-frame{margin-bottom:48px}.video-puzzle-art{right:12px;bottom:-28px;width:145px}}
 .hero .cta{margin-top:18px;position:relative;z-index:3;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .wave{display:block;width:100%;height:60px}
 /* marquee */
@@ -473,7 +473,7 @@ function renderHome(){
  if(LANG==='en'){document.title='TREATS | Creating an inclusive society for all children'}
  const collage=`<div class="home-video-frame">
    <span class="video-charm video-charm-heart" aria-hidden="true">♥</span>
-   <span class="video-charm video-charm-star" aria-hidden="true">✦</span>
+   <img class="video-puzzle-art" src="img/puzzle-people.webp" alt="" aria-hidden="true" width="1100" height="550">
    <div class="home-video-screen"><iframe src="https://www.youtube-nocookie.com/embed/XLKAnMxtxSo?rel=0&playsinline=1" title="${t('親切 TREATS 影片','TREATS introduction video')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
    <div class="video-frame-dots" aria-hidden="true"><i></i><i></i><i></i></div>
  </div>`;
@@ -491,7 +491,7 @@ function renderHome(){
    <p>${t('我們相信，每位兒童，不論任何能力和背景，均有權參與社會和享受與人接觸的樂趣。','We believe every child, regardless of ability and background, has the right to take part in society.')}</p>
    <a class="btn blue" href="#p2-4">${t('了解更多','Learn more')} →</a></div></div>
    <div class="stats">${[[45,t('週年（2026）','years (2026)')],[158500,t('名兒童及青少年每年受惠','children and youth reached each year')],[80,t('名兒童／每日約 $7（月捐 $200）','children for about $7 a day')],[10,t('個潛能獎學金名額／年','scholarships a year')]].map(s=>`<div class="stat rv pop"><b data-count="${s[0]}">0</b><span>${s[1]}</span></div>`).join('')}</div></div></section>
-  <section class="sec" style="background:var(--cream)"><div class="wrap">${idtag('p1-2')}<div class="roles-heading"><div class="roles-heading-copy"><span class="h2 rv">${t('你想做<em>甚麼</em>？','What would you like to <em>do</em>?')}</span><i class="squig"></i></div><img class="roles-heading-art" src="img/puzzle-people.webp" alt="" aria-hidden="true" loading="lazy" width="1100" height="550"></div>
+  <section class="sec" style="background:var(--cream)"><div class="wrap">${idtag('p1-2')}<span class="h2 rv">${t('你想做<em>甚麼</em>？','What would you like to <em>do</em>?')}</span><i class="squig"></i>
    <div class="roles">${ROLES.map((r,i)=>`<button class="role rv pop" data-i="${i}" style="transition-delay:${i*70}ms"><span class="tag id" style="background:#fff3">${r[0]}</span><h3>${r[1]}</h3><p>${r[2]}</p><span class="go">→</span></button>`).join('')}</div>
    <div class="rolepanel" id="rp"><div class="in"></div></div></div></section>
   <section class="sec"><div class="wrap">${idtag('p1-3')}<span class="h2 rv">${t('最新<em>招募</em>','Now <em>recruiting</em>')}</span><i class="squig"></i>
